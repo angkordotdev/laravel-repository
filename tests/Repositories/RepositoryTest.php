@@ -7,10 +7,8 @@ use Torann\LaravelRepository\Test\TestCase;
 
 class RepositoryTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function preventInvalidUserInput()
+
+    public function testPreventInvalidUserInput()
     {
         $repo = $this->makeRepository();
 
@@ -23,10 +21,7 @@ class RepositoryTest extends TestCase
         $this->assertEquals(true, $repo->paginate('select *'));
     }
 
-    /**
-     * @test
-     */
-    public function shouldGetAll()
+    public function testShouldGetAll()
     {
         $return = new Collection('foo');
 
@@ -36,12 +31,9 @@ class RepositoryTest extends TestCase
             ->shouldReceive('get')->once()
             ->andReturn($return);
 
-        $this->assertEquals($return, $repo->all());
+        $this->assertSame($return, $repo->all());
     }
 
-    /**
-     * @test
-     */
     public function testPluck()
     {
         $expected_array = [
@@ -64,9 +56,6 @@ class RepositoryTest extends TestCase
         $this->assertEquals($expected_array, $repo->pluck('title', 'name'));
     }
 
-    /**
-     * @test
-     */
     public function testPaginate()
     {
         $repo = $this->makeRepository();
@@ -78,9 +67,6 @@ class RepositoryTest extends TestCase
         $this->assertEquals(true, $repo->paginate(11));
     }
 
-    /**
-     * @test
-     */
     public function testSimplePaginate()
     {
         $repo = $this->makeRepository();
@@ -92,9 +78,6 @@ class RepositoryTest extends TestCase
         $this->assertEquals(true, $repo->simplePaginate(11));
     }
 
-    /**
-     * @test
-     */
     public function testFind()
     {
         $expected_array = [
@@ -112,9 +95,6 @@ class RepositoryTest extends TestCase
         $this->assertEquals($expected_array, $repo->find($expected_array['id']));
     }
 
-    /**
-     * @test
-     */
     public function testFindBy()
     {
         $expected_array = [
@@ -137,9 +117,6 @@ class RepositoryTest extends TestCase
         $this->assertEquals($expected_array, $repo->findBy('id', $expected_array['id']));
     }
 
-    /**
-     * @test
-     */
     public function testFindAllBy()
     {
         $expected_array = [
@@ -169,9 +146,6 @@ class RepositoryTest extends TestCase
         $this->assertEquals($expected_array, $repo->findAllBy('email', 'admin@mail.com'));
     }
 
-    /**
-     * @test
-     */
     public function testFindAllByArray()
     {
         $ids = [1, 33];
@@ -203,9 +177,6 @@ class RepositoryTest extends TestCase
         $this->assertEquals($expected_array, $repo->findAllBy('id', $ids));
     }
 
-    /**
-     * @test
-     */
     public function testFindWhere()
     {
         $expected_array = [
@@ -229,9 +200,6 @@ class RepositoryTest extends TestCase
         ]));
     }
 
-    /**
-     * @test
-     */
     public function testFindWhereWithConditions()
     {
         $expected_array = [
@@ -255,9 +223,6 @@ class RepositoryTest extends TestCase
         ]));
     }
 
-    /**
-     * @test
-     */
     public function testCacheCallbackWithCache()
     {
         $repo = $this->makeRepository();
@@ -278,9 +243,6 @@ class RepositoryTest extends TestCase
         $this->assertEquals('admin@mail.com', $repo->findByEmail('admin@mail.com'));
     }
 
-    /**
-     * @test
-     */
     public function testFindUsingScope()
     {
         $expected = new Collection([
