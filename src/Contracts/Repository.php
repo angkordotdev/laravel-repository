@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @template TKey of array-key
  * @template TValue
- *
- * @implements \ArrayAccess<TKey, TValue>
  */
 interface Repository
 {
